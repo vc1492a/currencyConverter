@@ -26,31 +26,38 @@ public class currencyConverter
                 System.out.println("enter the name of the currency (not USD):");
                 String currencyName = scan.next();
 
-                // ask the user to type the price for one dollar in another currency
-                System.out.println("enter the exchange rate vs. United States dollar (USD as base):");
-                String exchangeRate = scan.next();
+                // define the exchange rate as a float
+                float exchangeRate;
 
-                // transform the string to a float for calculation
-                float exchangeRateFloat = Float.parseFloat(exchangeRate);
+                // ask the user to input the exchange rate
+                System.out.println("enter the exchange rate vs. United States dollar (USD as base):");
+                // ensure that the exchange rate is a numerical value
+                while (!scan.hasNextFloat()) {
+                    System.out.println("please enter a numerical value");
+                    scan.next();
+                }
+                // if not a numerical value, scan for the next input
+                exchangeRate = scan.nextFloat();
 
                 // convert from dollars to the input currency and vice versa
-                double exchangeRateFloatTwo = (1.0 / exchangeRateFloat);
+                double exchangeRateTwo = (1.0 / exchangeRate);
 
                 // print the exchange rates
-                System.out.println("one USD is equal to " + exchangeRateFloat + " " + currencyName);
+                System.out.println("one USD is equal to " + exchangeRate + " " + currencyName);
                 System.out.println("AND");
-                System.out.println("one " + currencyName + " is equal to " + exchangeRateFloatTwo + " USD");
+                System.out.println("one " + currencyName + " is equal to " + exchangeRateTwo + " USD");
 
-                // ask the user if they would like to change the currency or exhange rate
+                // ask the user if they would like to change the currency or exchange rate
                 System.out.println("would you like to change the currency or exchange rate? (enter Y or N)");
                 String exitCondition = scan.next(); // the sentinel character entry
 
+                // the exit condition, i.e. entry of sentinel character
                 if(exitCondition.equals("N")) {
                     System.out.println("program stopped");
                     break;
                 }
             } // end try
-            
+
             catch (Exception ex) {
                 ex.printStackTrace(); // error catching
                 System.out.println("an error has occurred");
