@@ -11,24 +11,24 @@
  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-// TO - DO
-// force currency name and exchange rate definition before allowing option 3.
-// clean up comments and file structure.
-// should exchange rate two be global?
-
 import java.util.Scanner; // import the scanner
 
 public class currencyConverter {
 
-    // probably need to define some variables here
+    // define variables to be used globally
     public static float exchangeRate = 0;
     public static String currencyName;
 
+
+    /**
+     * This is the main function that calls the remaining functions: printMenu, enterCurrencyName, enterExchangeRate,
+     * performCalculation, and printError.
+     * @param args String is passed into the main function.
+     */
     public static void main(String args[]) {
 
         // print welcome message
-        System.out.println("Welcome and Go Wildcats!");
-        System.out.println("");
+        System.out.println("Welcome and Go Wildcats!\n");
 
         // enter some sort of cool console art here just because
         System.out.println("|||    |||||   ||||     ||||");
@@ -45,9 +45,9 @@ public class currencyConverter {
         // create a Scanner that's going to read from system input on console
         Scanner scan = new Scanner(System.in);
 
-        while(true) {
+        while (true) {
 
-            // explain motivation for try/catch block
+            // using the try/catch block to log fatal program errors
             try {
 
                 // print the menu
@@ -118,7 +118,10 @@ public class currencyConverter {
 
     } // end main
 
-    // enter the currency name function
+    /**
+     * This function asks the user to specify the currency name.
+     * @param scan Scanner is passed into this function.
+     */
     public static void enterCurrencyName(Scanner scan) {
 
         // ask the user to enter the name of the currency
@@ -130,7 +133,10 @@ public class currencyConverter {
 
     } // end function
 
-    // enter the exchange rate function
+    /**
+     * This function asks the user to specify the currency name.
+     * @param scan Scanner is passed into this function.
+     */
     public static void enterExchangeRate(Scanner scan) {
 
         // ask the user to input the exchange rate
@@ -152,27 +158,46 @@ public class currencyConverter {
 
     } // end function
 
-     // perform the calculation and display results function
+     /**
+     * This function performs the calculation after the user has specified the currency name and exchange rate.
+     */
       public static void performCalculation() {
 
           // check to see if currencyName and exchangeRate have been user-defined
+          while (true) {
 
-          // convert from dollars to the input currency and vice versa
-          double exchangeRateTwo = (1.0 / currencyConverter.exchangeRate);
+              // check to see if the currencyName and/or exchangeRate have been user-defined
+              if (currencyName == null || exchangeRate == 0) {
 
-          // print the exchange rates
-          System.out.println("one USD is equal to " + exchangeRate + " " + currencyName);
-          System.out.println("AND");
-          System.out.println("one " + currencyName + " is equal to " + exchangeRateTwo + " USD");
+                  printError("Please define the currency name and/or exchange rate prior to using option 3");
+                  break;
 
+              }
+
+              // if the currencyName and exchangeRate are defined, perform calculation
+              else if (exchangeRate != 0) {
+
+                  // convert from dollars to the input currency and vice versa
+                  double exchangeRateTwo = (1.0 / currencyConverter.exchangeRate);
+
+                  // print the exchange rates
+                  System.out.println("one USD is equal to " + exchangeRate + " " + currencyName);
+                  System.out.println("AND");
+                  System.out.println("one " + currencyName + " is equal to " + exchangeRateTwo + " USD");
+                  break;
+
+              }
+
+          }
 
     } // end function
 
-    // print menu function
+     /**
+     * This function prints the console menu.
+     */
     public static void printMenu() {
 
-        System.out.println(""); // blank space for prettyness. Find a better solution.
-        System.out.println("Please select an option below (i.e. enter 1, 2, or 3):");
+        System.out.println("\nPlease select an option below (i.e. enter 1, 2, or 3):");
         System.out.println("--------------------------------");
         System.out.println("1: Enter the name of the currency");
         System.out.println("2: Enter the exchange rate");
@@ -182,10 +207,12 @@ public class currencyConverter {
 
     } // end function
 
-    // print error function
+     /**
+     * This function is used for printing errors.
+     */
     public static void printError(String s) {
 
-        System.out.println("Error: " + s);
+        System.out.println("\nError: " + s);
 
     } // end function
 
