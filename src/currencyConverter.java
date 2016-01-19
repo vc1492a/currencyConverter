@@ -109,8 +109,9 @@ public class currencyConverter {
 
             catch (Exception ex) {
 
+                printError("a fatal program error has occurred");
                 ex.printStackTrace(); // error catching
-                System.out.println("a fatal program error has occurred");
+                break;
 
             } // end catch
 
